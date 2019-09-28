@@ -11,12 +11,32 @@ class TechList extends Component {
 
   state = {
     newTech: '',
-    techs: [
-      'Node.js',
-      'React JS',
-      'React Native',
-    ]
+    techs: []
   };
+
+  /** Executado assim que o componente aparece na tela */
+  componentDidMount() {
+    const techs = localStorage.getItem('techs');
+
+    if (techs) {
+      this.setState({ techs: JSON.parse(techs) });
+    }
+  }
+
+  /** Executado sempre que houver alterações nas props ou estado
+   *  args: prevPops, prevState
+   */
+  componentDidUpdate(_, prevState) {
+    // this.pros, this.state (novas)
+    if (prevState.techs !== this.state.techs) {
+      localStorage.setItem('techs', JSON.stringify(this.state.techs));
+    }
+  }
+
+  /** Executado quando o componente deixar de existir */
+  componentWillUnmount() {
+
+  }
 
   /** Toda função própria dentro de um componente em Classe, essa função
    *  precisa ser escrita no formato de arrow functions. Caso contrário, 
@@ -34,7 +54,7 @@ class TechList extends Component {
     this.setState({ 
       techs: [...this.state.techs, this.state.newTech],
       newTech: '',
-     });
+    });
   }
 
   handleDelete = (tech) => {
@@ -58,7 +78,6 @@ class TechList extends Component {
               onDelete={() => this.handleDelete(tech)} 
             />
           ))}
-          <TechItem />
         </ul>
         <input 
           type="text" 

@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import TechItem from './TechItem';
 
 class TechList extends Component {
+  /*static propTypes = {};*/
+
   /*static defaultProps = {
     tech: 'Oculto'
   }*/

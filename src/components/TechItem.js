@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 /** Como não vai ter informações de state, poderá ser usado as funções */
 
 /** É passado como parametros um objeto contendo todas as properties */
@@ -13,6 +14,11 @@ function TechItem({ tech, onDelete }) {
 
 TechItem.defaultProps = {
   tech: 'Oculto',
+};
+
+TechItem.propTypes = {
+  tech: PropTypes.string,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default TechItem;

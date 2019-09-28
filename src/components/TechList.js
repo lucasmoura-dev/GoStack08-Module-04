@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import TechItem from './TechItem';
+
 class TechList extends Component {
   state = {
     newTech: '',
@@ -13,7 +15,8 @@ class TechList extends Component {
   /** Toda função própria dentro de um componente em Classe, essa função
    *  precisa ser escrita no formato de arrow functions. Caso contrário, 
    *  ela nunca teria acesso ao this. As variáveis dentro do state são imutáveis,
-   *  ela não pode sofrer mutação, será necessário usar a função setState()
+   *  ela não pode sofrer mutação, será necessário usar a função setState().,
+   *  As propriedades dentro de um componente com Classe ficam em this.props.
     */
   handleInputChange = e => {
     this.setState({ newTech: e.target.value });
@@ -35,17 +38,19 @@ class TechList extends Component {
   }
 
   /** Todo component do tipo classe precisa ter o método render. Definir o value
-   *  do input com o valor do state é uma boa prática.
+   *  do input com o valor do state é uma boa prática. 
+   *  Propriedade é tudo que passa como parâmetro para o elemento dentro da tag.
    */
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
         <ul>
           {this.state.techs.map(tech => (
-            <li key={tech}>
-              {tech}
-              <button onClick={() => this.handleDelete(tech)} type="button">Remover</button>
-            </li>
+            <TechItem 
+              key={tech} 
+              tech={tech} 
+              onDelete={() => this.handleDelete(tech)} 
+            />
           ))}
         </ul>
         <input 

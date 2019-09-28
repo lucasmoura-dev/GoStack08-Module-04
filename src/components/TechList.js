@@ -28,6 +28,12 @@ class TechList extends Component {
      });
   }
 
+  handleDelete = (tech) => {
+    this.setState({
+      techs: this.state.techs.filter(t => t !== tech),
+    })
+  }
+
   /** Todo component do tipo classe precisa ter o método render. Definir o value
    *  do input com o valor do state é uma boa prática.
    */
@@ -35,7 +41,12 @@ class TechList extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <ul>
-          {this.state.techs.map(tech => <li key={tech}>{tech}</li>)}
+          {this.state.techs.map(tech => (
+            <li key={tech}>
+              {tech}
+              <button onClick={() => this.handleDelete(tech)} type="button">Remover</button>
+            </li>
+          ))}
         </ul>
         <input 
           type="text" 
